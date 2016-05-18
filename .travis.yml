@@ -1,0 +1,17 @@
+language: c
+env:
+  - OCAML=4.02.1
+  - OCAML=4.02.3
+  - OCAML=4.03.0
+script:
+  - echo "yes" | sudo add-apt-repository ppa:avsm/ppa
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq opam
+  - export OPAMYES=1
+  - opam init
+  - opam switch $OCAML
+  - eval `opam config env`
+  - opam pin add -n -k path junit .
+  - opam install --deps-only -t junit
+  - opam install -d -t -v junit
+  - opam remove junit

@@ -1,0 +1,36 @@
+Name:        junit
+Version:     dev
+Synopsis:    Library to produce XML JUnit reports.
+Authors:     Louis Roché <louis@louisroche.net>
+Maintainers: Louis Roché <louis@louisroche.net>
+License:     MIT
+
+Description: Library to produce XML JUnit reports.
+Homepage: https://github.com/Khady/ocaml-junit
+
+SourceRepository head
+  Type: git
+  Location: git://github.com/Khady/ocaml-junit.git
+  Browser: https://github.com/Khady/ocaml-junit
+
+OASISFormat: 0.4
+BuildTools: ocamlbuild
+Plugins: DevFiles (0.4), META (0.4)
+
+Library "junit"
+  Path: lib
+  Modules: Junit
+  InternalModules:
+  BuildDepends: tyxml, ptime
+
+AlphaFeatures: ocamlbuild_more_args
+Document "junit_api"
+  Type: ocamlbuild (0.4)
+  BuildTools: ocamldoc
+
+  Title: API reference for JUnit
+  PostCommand: cp doc/style.css junit_api.docdir/
+  XOCamlbuildPath: .
+  XOCamlbuildExtraArgs:
+    "-docflags '-colorize-code -short-functors -charset utf-8'"
+  XOCamlbuildLibraries: junit

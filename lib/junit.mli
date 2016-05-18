@@ -7,15 +7,18 @@
     {{:https://github.com/windyroad/JUnit-Schema} JUnit-schema} git
     repository and the produced XML is supposed to be accepted by
     Jenkins.
+
+    Those are low level functions. Values like [id], [failures] or
+    [tests] will not be checked;
 *)
 
-(** {1 Categories of elements and attributes} *)
+(** {2 Categories of elements and attributes} *)
 
 (** This part defines the categories of elements and attributes. *)
 
-(** {2 Attributes} *)
+(** {3 Attributes} *)
 
-type token
+type token = string
 (** https://www.w3.org/TR/xmlschema-2/#token
 
     [Definition:] token represents tokenized strings. The ·value space· of
@@ -29,17 +32,13 @@ type token
     or more spaces. The ·base type· of token is normalizedString.
 *)
 
-val token : string -> token
+type timestamp
 
-type timestamp = string
-(** ISO8601_DATETIME_PATTERN
+val timestamp : Ptime.t -> timestamp
 
-    TODO: turn it into a date.
-*)
+(** {3 Elements} *)
 
-(** {2 Elements} *)
-
-(** {3 Properties}  *)
+(** {4 Properties}  *)
 
 type property
 
@@ -51,7 +50,10 @@ val property :
   value:string ->
   property
 
-(** {3 Testcases} *)
+val property_to_xml : property -> Xml.elt
+(** Builds an XML element from a property. *)
+
+(** {4 Testcases} *)
 
 type error
 (** Indicates that the test errored. An errored test is one that had
@@ -63,7 +65,7 @@ type error
 val error :
   ?message:string ->
   typ:string ->
-  string ->     (* pcdata? *)
+  string ->
   error
 (** Creates an error element.
 
@@ -75,6 +77,9 @@ val error :
 
     @param description Description of the error.
 *)
+
+val error_to_xml : error -> Xml.elt
+(** Builds an XML element from a error. *)
 
 type failure
 (** Indicates that the test failed. A failure is a test which the code
@@ -94,12 +99,17 @@ val failure :
     @param description Description of the failure.
 *)
 
+val failure_to_xml : failure -> Xml.elt
+(** Builds an XML element from a failure. *)
+
 type result =
-  [ `Error of error
-  | `Failure of failure
-  | `Pass
-  | `Skipped    (** Not part of the spec, but available in jenkins. *)
-  ]
+  | Error of error
+  | Failure of failure
+  | Pass
+  | Skipped     (** Not part of the spec, but available in jenkins. *)
+
+val result_to_xml : result -> Xml.elt
+(** Builds an XML element from a result. *)
 
 type testcase
 
@@ -123,7 +133,10 @@ val testcase :
     @param result Result of the test.
 *)
 
-(** {3 Testsuites} *)
+val testcase_to_xml : testcase -> Xml.elt
+(** Builds an XML element from a testcase. *)
+
+(** {4 Testsuites} *)
 
 type testsuite
 (** Contains the results of executing a testsuite. *)
@@ -195,3 +208,9 @@ val testsuite :
     @param system_err Data that was written to standard error while
     the test was executed.
 *)
+
+val testsuite_to_xml : testsuite -> Xml.elt
+(** Builds an XML element from a testsuite. *)
+
+val to_xml : testsuites -> Xml.elt
+(** Builds an XML element from a list of testsuites. *)

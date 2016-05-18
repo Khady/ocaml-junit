@@ -2,5 +2,7 @@ S lib
 
 B _build/**
 
+PKG tyxml
+PKG ptime
+
 FLG -w +A-4-9-42-44-48
-FLG -strict_sequence -safe_string -keep_locs -short_paths -no_alias_deps
