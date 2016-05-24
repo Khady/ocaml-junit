@@ -1,4 +1,4 @@
-(** JUnit types with variants *)
+(** Low level interface to build XML elements. *)
 
 (** This module defines basic data types for data, attributes and
     element occuring in JUnit reports.

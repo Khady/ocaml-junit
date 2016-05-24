@@ -19,7 +19,7 @@ Plugins: DevFiles (0.4), META (0.4)
 
 Library "junit"
   Path: lib
-  Modules: Junit
+  Modules: Junit_xml
   InternalModules:
   BuildDepends: tyxml, ptime
 
