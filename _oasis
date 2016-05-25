@@ -19,9 +19,9 @@ Plugins: DevFiles (0.4), META (0.4)
 
 Library "junit"
   Path: lib
-  Modules: Junit_xml
+  Modules: Junit, Junit_xml
   InternalModules:
-  BuildDepends: tyxml, ptime
+  BuildDepends: tyxml, ptime, ptime.clock.os
 
 AlphaFeatures: ocamlbuild_more_args
 Document "junit_api"

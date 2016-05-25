@@ -131,13 +131,15 @@ type testsuite =
     time : float;
     properties : properties;
     testcases : testcases;
-    system_out : string;
-    system_err : string;
+    system_out : string option;
+    system_err : string option;
   }
 
 type testsuites = testsuite list
 
 let testsuite
+    ?system_out
+    ?system_err
     ~package
     ~id
     ~name
@@ -149,8 +151,6 @@ let testsuite
     ~time
     properties
     testcases
-    ~system_out
-    ~system_err
   =
   {
     package;
@@ -178,8 +178,6 @@ let testsuite_to_xml testsuite =
   let failures = int_attrib "failures" testsuite.failures in
   let errors = int_attrib "errors" testsuite.errors in
   let time = float_attrib "time" testsuite.time in
-  let system_out = string_attrib "system_out" testsuite.system_out in
-  let system_err = string_attrib "system_err" testsuite.system_err in
   let attributes =
     [
       package;
@@ -191,9 +189,17 @@ let testsuite_to_xml testsuite =
       failures;
       errors;
       time;
-      system_out;
-      system_err;
     ]
+  in
+  let system_out =
+    match testsuite.system_out with
+    | None -> []
+    | Some so -> [node "system_out" [pcdata so]]
+  in
+  let system_err =
+    match testsuite.system_err with
+    | None -> []
+    | Some se -> [node "system_err" [pcdata se]]
   in
   let properties = List.map property_to_xml testsuite.properties in
   let testcases = List.map testcase_to_xml testsuite.testcases in
@@ -202,8 +208,9 @@ let testsuite_to_xml testsuite =
       [
         properties;
         testcases;
+        system_out;
+        system_err
       ]
-
   in
   node
     "testsuite"

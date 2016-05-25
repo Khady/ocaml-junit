@@ -9,7 +9,10 @@
     Jenkins.
 
     Those are low level functions. Values like [id], [failures] or
-    [tests] will not be checked;
+    [tests] will not be checked.
+
+    It allows you to build a report by hand if the facilities that are
+    offered by {!module:Junit} does not suit your needs.
 *)
 
 (** {2 Categories of elements and attributes} *)
@@ -55,7 +58,12 @@ val property_to_xml : property -> Xml.elt
 
 (** {4 Testcases} *)
 
-type error
+type error =
+  {
+    message : string option;
+    typ : string;
+    description : string;
+  }
 (** Indicates that the test errored. An errored test is one that had
     an unanticipated problem. e.g., an unchecked throwable; or a problem
     with the implementation of the test. Contains as a text node
@@ -81,11 +89,17 @@ val error :
 val error_to_xml : error -> Xml.elt
 (** Builds an XML element from a error. *)
 
-type failure
+type failure =
+  {
+    message : string option;
+    typ : string;
+    description : string;
+  }
 (** Indicates that the test failed. A failure is a test which the code
     has explicitly failed by using the mechanisms for that purpose. e.g.,
     via an assertEquals. Contains as a text node relevant data for the
-    failure, e.g., a stack trace. *)
+    failure, e.g., a stack trace.
+*)
 
 val failure :
   ?message:string ->
@@ -145,6 +159,8 @@ type testsuites = testsuite list
 (** Contains an aggregation of testsuite results. *)
 
 val testsuite :
+  ?system_out:string ->
+  ?system_err:string ->
   package:token ->
   id:int ->
   name:token ->
@@ -156,8 +172,6 @@ val testsuite :
   time:float ->
   properties ->
   testcases ->
-  system_out:string ->
-  system_err:string ->
   testsuite
 (** Creates a testsuite.
 
