@@ -28,5 +28,6 @@ depends: [
   "ocamlbuild" {build}
   "ocamlfind" {build}
   "ptime"
-  "tyxml"
+  "tyxml" { >= "4.0.0" }
 ]
+available: [ocaml-version >= "4.02.1"]

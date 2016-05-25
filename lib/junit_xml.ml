@@ -1,4 +1,4 @@
-open Xml
+open Tyxml.Xml
 
 type token = string
 
@@ -87,7 +87,7 @@ type result =
   | Pass
   | Skipped
 
-let result_to_xml : result -> Xml.elt = function
+let result_to_xml : result -> Tyxml.Xml.elt = function
   | Error e -> error_to_xml e
   | Failure f -> failure_to_xml f
   | Pass -> node "pass" []

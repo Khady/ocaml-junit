@@ -53,7 +53,7 @@ val property :
   value:string ->
   property
 
-val property_to_xml : property -> Xml.elt
+val property_to_xml : property -> Tyxml.Xml.elt
 (** Builds an XML element from a property. *)
 
 (** {4 Testcases} *)
@@ -86,7 +86,7 @@ val error :
     @param description Description of the error.
 *)
 
-val error_to_xml : error -> Xml.elt
+val error_to_xml : error -> Tyxml.Xml.elt
 (** Builds an XML element from a error. *)
 
 type failure =
@@ -113,7 +113,7 @@ val failure :
     @param description Description of the failure.
 *)
 
-val failure_to_xml : failure -> Xml.elt
+val failure_to_xml : failure -> Tyxml.Xml.elt
 (** Builds an XML element from a failure. *)
 
 type result =
@@ -122,7 +122,7 @@ type result =
   | Pass
   | Skipped     (** Not part of the spec, but available in jenkins. *)
 
-val result_to_xml : result -> Xml.elt
+val result_to_xml : result -> Tyxml.Xml.elt
 (** Builds an XML element from a result. *)
 
 type testcase
@@ -147,7 +147,7 @@ val testcase :
     @param result Result of the test.
 *)
 
-val testcase_to_xml : testcase -> Xml.elt
+val testcase_to_xml : testcase -> Tyxml.Xml.elt
 (** Builds an XML element from a testcase. *)
 
 (** {4 Testsuites} *)
@@ -223,8 +223,8 @@ val testsuite :
     the test was executed.
 *)
 
-val testsuite_to_xml : testsuite -> Xml.elt
+val testsuite_to_xml : testsuite -> Tyxml.Xml.elt
 (** Builds an XML element from a testsuite. *)
 
-val to_xml : testsuites -> Xml.elt
+val to_xml : testsuites -> Tyxml.Xml.elt
 (** Builds an XML element from a list of testsuites. *)
