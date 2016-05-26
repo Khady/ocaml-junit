@@ -114,16 +114,13 @@ module Testsuite = struct
         time = t.time +. testcases.Testcase.time;
       }
     in
-    let t =
-      match testcases.Testcase.result with
-      | Testcase.Pass
-      | Testcase.Skipped -> t
-      | Testcase.Error _ ->
-        { t with errors = t.errors + 1; }
-      | Testcase.Failure _ ->
-        { t with failures = t.failures + 1; }
-    in
-    t
+    match testcases.Testcase.result with
+    | Testcase.Pass
+    | Testcase.Skipped -> t
+    | Testcase.Error _ ->
+      { t with errors = t.errors + 1; }
+    | Testcase.Failure _ ->
+      { t with failures = t.failures + 1; }
 
   let add_testcases testcases t =
     List.fold_left (fun t tc -> add_testcase tc t) t testcases

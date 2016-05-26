@@ -6,7 +6,7 @@ type timestamp = string
 
 let timestamp time =
   let (y, m, d), ((hh, ss, mm), _) = Ptime.to_date_time time in
-  Printf.sprintf "%04d-%02d-%02dT%02d:%02d:%02d\n" y m d hh ss mm
+  Printf.sprintf "%04d-%02d-%02dT%02d:%02d:%02d" y m d hh ss mm
 
 type property =
   {
