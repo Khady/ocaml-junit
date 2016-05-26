@@ -25,6 +25,20 @@ Library "junit"
   InternalModules:
   BuildDepends: tyxml (>= 4.0.0), ptime, ptime.clock.os
 
+Executable "examples"
+  Path: examples
+  MainIs: all.ml
+  Build$: flag(tests)
+  CompiledObject: best
+  Install: false
+  BuildDepends: junit
+
+Test "simple_example"
+  Run$: flag(tests)
+  TestTools: examples
+  Command: $examples
+  WorkingDirectory: examples
+
 AlphaFeatures: ocamlbuild_more_args
 Document "junit_api"
   Type: ocamlbuild (0.4)

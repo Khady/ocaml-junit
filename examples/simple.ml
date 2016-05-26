@@ -28,7 +28,7 @@
 
 *)
 
-let () =
+let simple () =
   let junitXmlReporter = Junit.Testsuite.make "JUnitXmlReporter" in
   let junitXmlReportConstructor =
     let properties =
@@ -63,4 +63,4 @@ let () =
   in
   let report = Junit.make [junitXmlReporter; junitXmlReportConstructor] in
   let xml_report = Junit.to_xml report in
-  Tyxml.Xml.print_list print_string [xml_report]
+  Tyxml.Xml.print_list print_endline [xml_report]

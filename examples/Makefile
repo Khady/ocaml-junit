@@ -1,5 +1,5 @@
 all:
-	ocamlbuild -use-ocamlfind simple.byte
+	ocamlbuild -use-ocamlfind all.byte
 
 clean:
 	ocamlbuild -clean
