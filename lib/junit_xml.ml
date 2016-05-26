@@ -90,7 +90,7 @@ type result =
 let result_to_xml : result -> Tyxml.Xml.elt = function
   | Error e -> error_to_xml e
   | Failure f -> failure_to_xml f
-  | Pass -> node "pass" []
+  | Pass -> Tyxml.Xml.empty ()
   | Skipped -> node "skipped" []
 
 type testcase =

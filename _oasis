@@ -33,7 +33,7 @@ Executable "examples"
   Install: false
   BuildDepends: junit
 
-Test "simple_example"
+Test "examples"
   Run$: flag(tests)
   TestTools: examples
   Command: $examples

@@ -106,15 +106,16 @@ module Testsuite = struct
       testcases = [];
     }
 
-  let add_testcase testcases t =
+  let add_testcase testcase t =
     let t =
       {
         t with
         tests = t.tests + 1;
-        time = t.time +. testcases.Testcase.time;
+        time = t.time +. testcase.Testcase.time;
+        testcases = testcase :: t.testcases
       }
     in
-    match testcases.Testcase.result with
+    match testcase.Testcase.result with
     | Testcase.Pass
     | Testcase.Skipped -> t
     | Testcase.Error _ ->
