@@ -27,6 +27,9 @@ let property_to_xml property =
   let value = string_attrib "value" property.value in
   node "property" ~a:[name; value] []
 
+let properties_to_xml properties =
+  node "properties" (List.map property_to_xml properties)
+
 type error =
   {
     message : string option;
@@ -193,29 +196,20 @@ let testsuite_to_xml testsuite =
   in
   let system_out =
     match testsuite.system_out with
-    | None -> []
-    | Some so -> [node "system_out" [pcdata so]]
+    | None -> empty ()
+    | Some so -> node "system_out" [pcdata so]
   in
   let system_err =
     match testsuite.system_err with
-    | None -> []
-    | Some se -> [node "system_err" [pcdata se]]
+    | None -> empty ()
+    | Some se -> node "system_err" [pcdata se]
   in
-  let properties = List.map property_to_xml testsuite.properties in
+  let properties = properties_to_xml testsuite.properties in
   let testcases = List.map testcase_to_xml testsuite.testcases in
-  let content =
-    List.concat
-      [
-        properties;
-        testcases;
-        system_out;
-        system_err
-      ]
-  in
   node
     "testsuite"
     ~a:attributes
-    content
+    (properties :: system_out :: system_err :: testcases)
 
 let to_xml testsuites =
   let elements = List.map testsuite_to_xml testsuites in
