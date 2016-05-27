@@ -40,11 +40,6 @@ module Testcase = struct
       time: float;
       result: result;
     }
-
-  let error = Junit_xml.error
-
-  let failure = Junit_xml.failure
-
   let make ~name ~classname ~time result =
     {
       name;
@@ -52,6 +47,33 @@ module Testcase = struct
       time;
       result
     }
+
+  let error ?message ~typ ~name ~classname ~time description  =
+    let result =
+      Error {
+        message;
+        typ;
+        description;
+      }
+    in
+    make ~name ~classname ~time result
+
+
+  let failure ?message ~typ ~name ~classname ~time description  =
+    let result =
+      Failure {
+        message;
+        typ;
+        description;
+      }
+    in
+    make ~name ~classname ~time result
+
+  let skipped ~name ~classname ~time =
+    make ~name ~classname ~time Skipped
+
+  let pass ~name ~classname ~time =
+    make ~name ~classname ~time Pass
 end
 
 module Testsuite = struct

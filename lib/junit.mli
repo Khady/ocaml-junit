@@ -1,7 +1,7 @@
 (** High level interface to produce JUnit reports. *)
 
 (** This module defines functions to create JUnit reports and export
-    them to XML.
+    them to XML. This XML is supposed to be accepted by Jenkins.
 *)
 
 module Property :
@@ -20,32 +20,20 @@ module Testcase :
 sig
   type t
 
-  type error
-  (** Indicates that the test errored. An errored test is one that had
-      an unanticipated problem. e.g., an unchecked throwable; or a
-      problem with the implementation of the test. Contains as a text
-      node relevant data for the error, e.g., a stack trace.
-*)
-
-  type failure
-  (** Indicates that the test failed. A failure is a test which the
-      code has explicitly failed by using the mechanisms for that
-      purpose. e.g., via an assertEquals. Contains as a text node
-      relevant data for the failure, e.g., a stack trace.
-*)
-
-  type result =
-    | Error of error
-    | Failure of failure
-    | Pass
-    | Skipped
-
   val error :
     ?message:string ->
     typ:string ->
+    name:string ->
+    classname:string ->
+    time:float ->
     string ->
-    error
+    t
   (** Creates an error element.
+
+      Indicates that the test errored. An errored test is one that had an
+      unanticipated problem. e.g., an unchecked throwable; or a
+      problem with the implementation of the test. Contains as a text
+      node relevant data for the error, e.g., a stack trace.
 
       @param message The error message. e.g., if a java exception is
       thrown, the return value of getMessage().
@@ -54,26 +42,77 @@ sig
       execption is thrown the full class name of the exception.
 
       @param description Description of the error.
+
+      @param name Name of the test method.
+
+      @param classname Full class name for the class the test method is
+      in.
+
+      @param time Time taken (in seconds) to execute the test.
   *)
 
   val failure :
     ?message:string ->
     typ:string ->
-    string ->
-    failure
-  (** Creates a failure element.
-
-      @param message The message specified in the assert.
-      @param typ The type of the assert.
-      @param description Description of the failure.
-  *)
-
-  val make :
     name:string ->
     classname:string ->
     time:float ->
-    result ->
+    string ->
     t
+  (** Creates a failure element.
+
+      Indicates that the test failed. A failure is a test which the code has
+      explicitly failed by using the mechanisms for that
+      purpose. e.g., via an assertEquals. Contains as a text node
+      relevant data for the failure, e.g., a stack trace.
+
+      @param message The message specified in the assert.
+
+      @param typ The type of the assert.
+
+      @param description Description of the failure.
+
+      @param name Name of the test method.
+
+      @param classname Full class name for the class the test method is
+      in.
+
+      @param time Time taken (in seconds) to execute the test.
+  *)
+
+  val skipped :
+    name:string ->
+    classname:string ->
+    time:float ->
+    t
+  (** Creates a skipped element.
+
+      Indicates that the test has not been launched.
+
+      @param name Name of the test method.
+
+      @param classname Full class name for the class the test method is
+      in.
+
+      @param time Time taken (in seconds) to execute the test.
+  *)
+
+  val pass :
+    name:string ->
+    classname:string ->
+    time:float ->
+    t
+  (** Creates a pass element.
+
+      Indicates that the test is a success.
+
+      @param name Name of the test method.
+
+      @param classname Full class name for the class the test method is
+      in.
+
+      @param time Time taken (in seconds) to execute the test.
+  *)
 end
 
 module Testsuite :

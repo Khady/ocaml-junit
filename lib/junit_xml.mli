@@ -5,8 +5,7 @@
 
     It is based on the XSD provided in
     {{:https://github.com/windyroad/JUnit-Schema} JUnit-schema} git
-    repository and the produced XML is supposed to be accepted by
-    Jenkins.
+    repository.
 
     Those are low level functions. Values like [id], [failures] or
     [tests] will not be checked.

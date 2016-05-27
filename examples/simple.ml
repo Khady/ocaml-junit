@@ -40,21 +40,21 @@ let simple () =
     in
     let testcases =
       [
-        Junit.Testcase.make
+        Junit.Testcase.failure
           ~name:"should default path to an empty string"
           ~classname:"JUnitXmlReporter.constructor"
           ~time:0.006
-          Junit.Testcase.(Failure (failure ~message:"test failure" ~typ:"not equal" "Assertion failed"));
-        Junit.Testcase.make
+          ~message:"test failure"
+          ~typ:"not equal"
+          "Assertion failed";
+        Junit.Testcase.skipped
           ~name:"should default consolidate to true"
           ~classname:"JUnitXmlReporter.constructor"
-          ~time:0.
-          Junit.Testcase.Skipped;
-        Junit.Testcase.make
+          ~time:0.;
+        Junit.Testcase.pass
           ~name:"should default useDotNotation to true"
           ~classname:"JUnitXmlReporter.constructor"
-          ~time:0.
-          Junit.Testcase.Pass;
+          ~time:0.;
       ]
     in
     Junit.Testsuite.make "JUnitXmlReporter.constructor"
