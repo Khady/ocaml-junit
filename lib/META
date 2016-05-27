@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 090557b63f0cddd50254b0ed75b50cf2)
+version = "0.1"
+description = "Library to produce XML JUnit reports."
+requires = "tyxml ptime ptime.clock.os"
+archive(byte) = "junit.cma"
+archive(byte, plugin) = "junit.cma"
+archive(native) = "junit.cmxa"
+archive(native, plugin) = "junit.cmxs"
+exists_if = "junit.cma"
+# OASIS_STOP
+

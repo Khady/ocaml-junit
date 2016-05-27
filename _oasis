@@ -1,5 +1,5 @@
 Name:        junit
-Version:     dev
+Version:     0.1
 Synopsis:    Library to produce XML JUnit reports.
 Authors:     Louis Roché <louis@louisroche.net>
 Maintainers: Louis Roché <louis@louisroche.net>

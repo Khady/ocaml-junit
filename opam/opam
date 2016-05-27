@@ -1,6 +1,6 @@
 opam-version: "1.2"
 name: "junit"
-version: "dev"
+version: "0.1"
 maintainer: "Louis Roché <louis@louisroche.net>"
 authors: [ "Louis Roché <louis@louisroche.net>" ]
 license: "MIT"
@@ -8,7 +8,6 @@ homepage: "https://github.com/Khady/ocaml-junit"
 dev-repo: "git://github.com/Khady/ocaml-junit.git"
 bug-reports: "https://github.com/Khady/ocaml-junit/issues"
 build: [
-  ["oasis" "setup"]
   ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
   ["ocaml" "setup.ml" "-build"]
 ]
@@ -17,14 +16,12 @@ remove: [
   ["ocamlfind" "remove" "junit"]
 ]
 build-test: [
-  ["oasis" "setup"]
   ["ocaml" "setup.ml" "-configure" "--enable-tests"]
   ["ocaml" "setup.ml" "-build"]
   ["ocaml" "setup.ml" "-test"]
 ]
 build-doc: [ "ocaml" "setup.ml" "-doc" ]
 depends: [
-  "oasis" {build & >= "0.4"}
   "ocamlbuild" {build}
   "ocamlfind" {build}
   "ptime"

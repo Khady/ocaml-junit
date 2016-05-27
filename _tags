@@ -1,0 +1,31 @@
+# OASIS_START
+# DO NOT EDIT (digest: 4349ee41b4c8be06f93b8e8f64eca2fc)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library junit
+"lib/junit.cmxs": use_junit
+<lib/*.ml{,i,y}>: package(ptime)
+<lib/*.ml{,i,y}>: package(ptime.clock.os)
+<lib/*.ml{,i,y}>: package(tyxml)
+# Executable examples
+<examples/all.{native,byte}>: package(ptime)
+<examples/all.{native,byte}>: package(ptime.clock.os)
+<examples/all.{native,byte}>: package(tyxml)
+<examples/all.{native,byte}>: use_junit
+<examples/*.ml{,i,y}>: package(ptime)
+<examples/*.ml{,i,y}>: package(ptime.clock.os)
+<examples/*.ml{,i,y}>: package(tyxml)
+<examples/*.ml{,i,y}>: use_junit
+# OASIS_STOP
