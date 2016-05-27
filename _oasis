@@ -40,12 +40,12 @@ Test "examples"
   WorkingDirectory: examples
 
 AlphaFeatures: ocamlbuild_more_args
-Document "junit_api"
+Document "api"
   Type: ocamlbuild (0.4)
   BuildTools: ocamldoc
-
+  InstallDir: $htmldir/junit
   Title: API reference for JUnit
-  PostCommand: cp doc/style.css junit_api.docdir/
+  PostCommand: cp doc/style.css api.docdir/
   XOCamlbuildPath: .
   XOCamlbuildExtraArgs:
     "-docflags '-colorize-code -short-functors -charset utf-8'"
