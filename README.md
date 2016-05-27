@@ -1,11 +1,16 @@
 # OCaml JUnit
 
-ocaml-junit is a module for the creation of JUnit xml reports. It
-provides a typed API to produce valid reports.
+ocaml-junit is a module for the creation of JUnit XML reports. It
+provides a typed API to produce valid reports. They are supposed to be
+accepted by Jenkins.
 
 ## Installation
 
+opam pin add junit https://github.com/Khady/ocaml-junit.git
+
 ## Documentation
+
+Available [here](https://khady.github.io/ocaml-junit/dev/)
 
 ## References:
 
