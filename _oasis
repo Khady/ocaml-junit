@@ -19,11 +19,23 @@ Plugins: DevFiles (0.4), META (0.4)
 
 OCamlVersion: >= 4.02.1
 
+Flag "ounit"
+  Description:  compile bridge to OUnit
+  Default:      false
+
 Library "junit"
   Path: lib
   Modules: Junit, Junit_xml
   InternalModules:
   BuildDepends: tyxml (>= 4.0.0), ptime, ptime.clock.os
+
+Library "junit_ounit"
+  Path: lib/ounit/
+  Modules: Junit_ounit
+  InternalModules:
+  Build$: flag(ounit)
+  Install$: flag(ounit)
+  BuildDepends: junit, oUnit
 
 Executable "examples"
   Path: examples

@@ -9,7 +9,8 @@ dev-repo: "git://github.com/Khady/ocaml-junit.git"
 bug-reports: "https://github.com/Khady/ocaml-junit/issues"
 build: [
   ["oasis" "setup"]
-  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix
+        "--%{ounit:enable}%-ounit"]
   ["ocaml" "setup.ml" "-build"]
 ]
 install: ["ocaml" "setup.ml" "-install"]
