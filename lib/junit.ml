@@ -40,6 +40,7 @@ module Testcase = struct
       time: float;
       result: result;
     }
+
   let make ~name ~classname ~time result =
     {
       name;
@@ -101,6 +102,7 @@ module Testsuite = struct
       ?system_out
       ?system_err
       ~name
+      ()
     =
     let package =
       match package with

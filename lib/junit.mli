@@ -128,6 +128,7 @@ sig
     ?system_out:string ->
     ?system_err:string ->
     name:string ->
+    unit ->
     t
   (** Creates a testsuite.
 
