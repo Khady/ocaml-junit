@@ -28,7 +28,8 @@ sig
     time:float ->
     string ->
     t
-  (** Creates an error element.
+  (** [error ?message ~typ ~name ~classname ~time description] creates
+      an error element.
 
       Indicates that the test errored. An errored test is one that had an
       unanticipated problem. e.g., an unchecked throwable; or a
@@ -59,7 +60,8 @@ sig
     time:float ->
     string ->
     t
-  (** Creates a failure element.
+  (** [failure ?message ~typ ~name ~classname ~time description] creates
+      a failure element.
 
       Indicates that the test failed. A failure is a test which the code has
       explicitly failed by using the mechanisms for that
@@ -85,7 +87,7 @@ sig
     classname:string ->
     time:float ->
     t
-  (** Creates a skipped element.
+  (** [skipped ~name ~classname ~time] creates a skipped element.
 
       Indicates that the test has not been launched.
 
@@ -102,7 +104,7 @@ sig
     classname:string ->
     time:float ->
     t
-  (** Creates a pass element.
+  (** [pass ~name ~classname ~time] creates a pass element.
 
       Indicates that the test is a success.
 
@@ -130,7 +132,8 @@ sig
     name:string ->
     unit ->
     t
-  (** Creates a testsuite.
+  (** [make ?package ?timestamp ?hostname ?system_out ?system_err
+      ~name ()] creates a testsuite.
 
       Attributes
 
@@ -152,7 +155,7 @@ sig
       @param name Full class name of the test for non-aggregated
       testsuite documents. Class name without the package for
       aggregated testsuites documents.
-*)
+  *)
 
   val add_testcases :
     Testcase.t list -> t -> t

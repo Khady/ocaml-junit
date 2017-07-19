@@ -74,7 +74,7 @@ val error :
   typ:string ->
   string ->
   error
-(** Creates an error element.
+(** [error ?message ~typ description] creates an error element.
 
     @param message The error message. e.g., if a java exception is
     thrown, the return value of getMessage().
@@ -105,7 +105,7 @@ val failure :
   typ:string ->
   string ->
   failure
-(** Creates a failure element.
+(** [failure ?message ~typ description] creates a failure element.
 
     @param message The message specified in the assert.
     @param typ The type of the assert.
