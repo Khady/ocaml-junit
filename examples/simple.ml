@@ -63,4 +63,4 @@ let simple () =
   in
   let report = Junit.make [junitXmlReporter; junitXmlReportConstructor] in
   let xml_report = Junit.to_xml report in
-  Tyxml.Xml.print_list print_endline [xml_report]
+  Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report
