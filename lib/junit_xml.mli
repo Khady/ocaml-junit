@@ -11,7 +11,7 @@
     [tests] will not be checked.
 
     It allows you to build a report by hand if the facilities that are
-    offered by {!module:Junit} does not suit your needs.
+    offered by {!module:Junit} do not suit your needs.
 *)
 
 (** {2 Categories of elements and attributes} *)

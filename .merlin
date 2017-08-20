@@ -1,9 +1,0 @@
-S lib
-S examples
-
-B _build/**
-
-PKG tyxml
-PKG ptime ptime.clock.os
-
-FLG -w +A-4-9-42-44-48

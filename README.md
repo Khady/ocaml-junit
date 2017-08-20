@@ -20,3 +20,6 @@ Available [here](https://khady.github.io/ocaml-junit/dev/)
 - [a gist](https://gist.github.com/erikd/4192748)
 
 Those files are archived in directory [`schemes`](schemes)
+
+License: LGPL either version 3 of the License, or (at your option) any
+later version with OCaml linking exception.

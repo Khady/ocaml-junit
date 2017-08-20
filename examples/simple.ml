@@ -28,8 +28,13 @@
 
 *)
 
+let timestamp =
+  match Ptime.of_date_time ((2013, 5, 24), ((10, 23, 58), 0)) with
+  | Some t -> t
+  | None -> assert false
+
 let simple () =
-  let junitXmlReporter = Junit.Testsuite.make "JUnitXmlReporter" () in
+  let junitXmlReporter = Junit.Testsuite.make ~timestamp ~name:"JUnitXmlReporter" () in
   let junitXmlReportConstructor =
     let properties =
       [
@@ -57,7 +62,7 @@ let simple () =
           ~time:0.;
       ]
     in
-    Junit.Testsuite.make "JUnitXmlReporter.constructor" ()
+    Junit.Testsuite.make ~timestamp ~name:"JUnitXmlReporter.constructor" ()
     |> Junit.Testsuite.add_testcases testcases
     |> Junit.Testsuite.add_properties properties
   in

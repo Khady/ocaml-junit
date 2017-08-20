@@ -1,5 +1,2 @@
-all:
-	ocamlbuild -use-ocamlfind all.byte
-
-clean:
-	ocamlbuild -clean
+build:
+	jbuilder build @examples
