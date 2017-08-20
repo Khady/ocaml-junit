@@ -29,7 +29,7 @@
 *)
 
 let simple () =
-  let junitXmlReporter = Junit.Testsuite.make "JUnitXmlReporter" in
+  let junitXmlReporter = Junit.Testsuite.make "JUnitXmlReporter" () in
   let junitXmlReportConstructor =
     let properties =
       [
@@ -57,7 +57,7 @@ let simple () =
           ~time:0.;
       ]
     in
-    Junit.Testsuite.make "JUnitXmlReporter.constructor"
+    Junit.Testsuite.make "JUnitXmlReporter.constructor" ()
     |> Junit.Testsuite.add_testcases testcases
     |> Junit.Testsuite.add_properties properties
   in
