@@ -4,6 +4,7 @@
  ((name examples)
   (libraries (junit))
   (modules (examples simple))
+  (flags (:standard -safe-string))
   ))
 
 (rule

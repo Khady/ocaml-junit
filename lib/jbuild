@@ -5,4 +5,6 @@
   (public_name junit)
   (wrapped false)
   (synopsis "JUnit XML reports generation library")
-  (libraries (tyxml ptime ptime.clock.os))))
+  (libraries (tyxml ptime ptime.clock.os))
+  (flags (:standard -safe-string))
+ ))

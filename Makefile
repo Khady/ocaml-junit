@@ -1,11 +1,11 @@
 build:
-	jbuilder build
+	jbuilder build --dev
 
 doc:
 	jbuilder build @doc
 
 test:
-	jbuilder runtest
+	jbuilder runtest --dev
 
 examples:
 	jbuilder build @examples/examples
