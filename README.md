@@ -10,7 +10,7 @@ opam pin add junit https://github.com/Khady/ocaml-junit.git
 
 ## Documentation
 
-Available [here](https://khady.github.io/ocaml-junit/dev/)
+Available [here](https://khady.github.io/ocaml-junit/junit/)
 
 ## References:
 
