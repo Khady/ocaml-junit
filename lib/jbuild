@@ -6,5 +6,5 @@
   (wrapped false)
   (synopsis "JUnit XML reports generation library")
   (libraries (tyxml ptime ptime.clock.os))
-  (flags (:standard -safe-string))
+  (flags (:standard -safe-string -short-paths))
  ))
