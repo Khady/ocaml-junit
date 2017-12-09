@@ -6,18 +6,17 @@ bug-reports: "https://github.com/Khady/ocaml-junit/issues"
 license: "LGPLv3+ with OCaml linking exception"
 dev-repo: "https://github.com/Khady/ocaml-junit.git"
 doc: "https://khady.github.io/ocaml-junit/junit/"
-tags: ["junit" "jenkins"]
+tags: ["junit" "jenkins" "ounit"]
 depends: [
   "ocamlfind" {build}
   "jbuilder" {build & >= "1.0+beta10"}
-  "ptime"
-  "tyxml" {>= "4.0.0"}
   "odoc" {doc & >= "1.1.1"}
+  "ounit"
+  "junit"
 ]
 available: [ocaml-version >= "4.02.3"]
 build: [
   ["jbuilder" "subst"] {pinned}
   ["jbuilder" "build" "-p" name "-j" jobs]
 ]
-build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
 build-doc: [["jbuilder" "build" "@doc" "-p" name "-j" jobs]]
