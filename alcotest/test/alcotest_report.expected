@@ -1,22 +1,3 @@
-Testing My first test.
- ...                Basic tests          0   Test with unexpected exception.[ERROR]             Basic tests          0   Test with unexpected exception.
- ...                Basic tests          1   Capitalize.[OK]                Basic tests          1   Capitalize.
- ...                Basic tests          2   Add entries.[OK]                Basic tests          2   Add entries.
- ...                Basic tests          3   Test with wrong result.[ERROR]             Basic tests          3   Test with wrong result.
-The full test results are available in `_build/_tests`.
-2 errors! in 0.000s. 4 tests run.
-Testing My second test.
- ...                Basic tests          0   Test with unexpected exception.[ERROR]             Basic tests          0   Test with unexpected exception.
- ...                Basic tests          1   Capitalize.[OK]                Basic tests          1   Capitalize.
- ...                Basic tests          2   Add entries.[OK]                Basic tests          2   Add entries.
- ...                Basic tests          3   Test with wrong result.[ERROR]             Basic tests          3   Test with wrong result.
-The full test results are available in `_build/_tests`.
-2 errors! in 0.000s. 4 tests run.
-Testing Success test suite.
- ...                Good tests          0   Capitalize.[OK]                Good tests          0   Capitalize.
- ...                Good tests          1   Add entries.[OK]                Good tests          1   Add entries.
-The full test results are available in `_build/_tests`.
-Test Successful in 0.000s. 2 tests run.
 <testsuites><testsuite package="junit_alcotest" id="0" name="My first test" timestamp="2013-05-24T10:23:58" hostname="localhost" tests="4" failures="1" errors="1" time="0"><properties></properties><testcase name="Test with unexpected exception" classname="" time="0"><error message="test crashed" type="exception raised">Invalid_argument(&quot;7&quot;)</error></testcase><testcase name="Capitalize" classname="" time="0"></testcase><testcase name="Add entries" classname="" time="0"></testcase><testcase name="Test with wrong result" classname="" time="0"><failure message="test failed" type="not expected result">Error string_of_int equals to '7': expecting
 7, got
 8.</failure></testcase></testsuite><testsuite package="junit_alcotest" id="1" name="My second test" timestamp="2013-05-24T10:23:58" hostname="localhost" tests="4" failures="1" errors="1" time="0"><properties></properties><testcase name="Test with unexpected exception" classname="" time="0"><error message="test crashed" type="exception raised">Invalid_argument(&quot;7&quot;)</error></testcase><testcase name="Capitalize" classname="" time="0"></testcase><testcase name="Add entries" classname="" time="0"></testcase><testcase name="Test with wrong result" classname="" time="0"><failure message="test failed" type="not expected result">Error string_of_int equals to '7': expecting

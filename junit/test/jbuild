@@ -8,13 +8,13 @@
   ))
 
 (rule
- ((targets (simple.output))
+ ((targets (simple.xml))
   (deps (simple.exe))
-  (action (with-stdout-to ${@} (run ${<})))))
+  (action (run ${<} ${@}))))
 
 (alias
  ((name runtest)
   (deps (simple.exe))
   (package junit)
-  (action (diff ${path:simple.expected} ${path:simple.output}))
+  (action (diff ${path:simple.expected} ${path:simple.xml}))
   ))

@@ -33,7 +33,7 @@ let timestamp =
   | Some t -> t
   | None -> assert false
 
-let simple () =
+let simple path =
   let junitXmlReporter = Junit.Testsuite.make ~timestamp ~name:"JUnitXmlReporter" () in
   let junitXmlReportConstructor =
     let properties =
@@ -67,7 +67,18 @@ let simple () =
     |> Junit.Testsuite.add_properties properties
   in
   let report = Junit.make [junitXmlReporter; junitXmlReportConstructor] in
-  let xml_report = Junit.to_xml report in
-  Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report
+  match path with
+  | None ->
+    let xml_report = Junit.to_xml report in
+    Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report
+  | Some path ->
+    Junit.to_file report path
 
-let () = simple ()
+let () =
+  let path =
+    if Array.length Sys.argv > 1 then
+      Some (Sys.argv.(1))
+    else
+      None
+  in
+  simple path

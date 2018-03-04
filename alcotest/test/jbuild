@@ -8,13 +8,14 @@
   ))
 
 (rule
- ((targets (alcotest_report.output))
+ ((targets (alcotest_report.xml))
   (deps (alcotest_report.exe))
-  (action (with-stdout-to ${@} (run ${<})))))
+  (action (setenv REPORT_PATH ${@} (run ${<})))
+  ))
 
 (alias
  ((name runtest)
   (package junit_alcotest)
-  (action (diff ${path:alcotest_report.expected} ${path:alcotest_report.output}))
+  (action (diff ${path:alcotest_report.expected} ${path:alcotest_report.xml}))
   (deps (alcotest_report.exe))
   ))

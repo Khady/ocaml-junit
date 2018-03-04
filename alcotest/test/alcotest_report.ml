@@ -35,7 +35,7 @@ let timestamp =
   | Some t -> t
   | None -> assert false
 
-let alcotest () =
+let alcotest path =
   let package = "junit_alcotest" in
   let (testsuite1, _) = JA.run_and_report ~package ~timestamp "My first test" [
     "Basic tests", test_set;
@@ -50,8 +50,15 @@ let alcotest () =
   ]
   in
   let report = Junit.make [testsuite1; testsuite2; testsuite3] in
-  let xml_report = Junit.to_xml report in
-  Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report;
+  begin match path with
+    | None ->
+      let xml_report = Junit.to_xml report in
+      Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report
+    | Some path ->
+      Junit.to_file report path
+  end;
   exit ()
 
-let () = alcotest ()
+let () =
+  let path = try Some (Sys.getenv "REPORT_PATH") with _ -> None  in
+  alcotest path
