@@ -24,7 +24,7 @@ let wrap_test handle_result (name, s, test) =
       raise exn
     | exn ->
       let exn_msg = Printexc.to_string exn in
-      Junit.Testcase.failure
+      Junit.Testcase.error
         ~name
         ~classname:""
         ~time:0.
