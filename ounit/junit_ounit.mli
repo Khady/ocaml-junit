@@ -7,6 +7,6 @@ val of_results : name:string -> OUnit.test_results -> Junit.Testsuite.t
     Junit testsuite named [name]. *)
 
 val to_file : name:string -> string -> OUnit.test_results -> unit
-(** Shortcut: convert the test results to a Junit testsuite, and dump
-    it into the given file as XML *)
+(** Shortcut: converts the test results to a Junit testsuite, and dump
+    it into the given file as XML. *)
 

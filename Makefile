@@ -7,9 +7,6 @@ doc:
 test:
 	jbuilder runtest --dev
 
-examples:
-	jbuilder build @examples/examples
-
 clean:
 	jbuilder clean
 

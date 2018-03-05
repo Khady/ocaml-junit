@@ -1,0 +1,20 @@
+(jbuild_version 1)
+
+(executable
+ ((name simple)
+  (modules (simple))
+  (libraries (junit))
+  (flags (:standard -safe-string -short-paths))
+  ))
+
+(rule
+ ((targets (simple.output))
+  (deps (simple.exe))
+  (action (with-stdout-to ${@} (run ${<})))))
+
+(alias
+ ((name runtest)
+  (deps (simple.exe))
+  (package junit)
+  (action (diff ${path:simple.expected} ${path:simple.output}))
+  ))

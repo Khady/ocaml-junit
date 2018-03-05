@@ -1,4 +1,4 @@
-(* Encode this example (from http://help.catchsoftware.com/display/ET/JUnit+Format):
+(** Encode this example (from http://help.catchsoftware.com/display/ET/JUnit+Format):
 
 <testsuites>
   <testsuite name="JUnitXmlReporter" errors="0" tests="0" failures="0"
@@ -69,3 +69,5 @@ let simple () =
   let report = Junit.make [junitXmlReporter; junitXmlReportConstructor] in
   let xml_report = Junit.to_xml report in
   Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report
+
+let () = simple ()

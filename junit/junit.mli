@@ -170,3 +170,4 @@ type t
 val make : Testsuite.t list ->  t
 val add_testsuite : Testsuite.t -> t -> t
 val to_xml : t -> Tyxml.Xml.elt
+val to_file : t -> string -> unit

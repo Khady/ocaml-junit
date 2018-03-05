@@ -217,3 +217,11 @@ let to_xml (t:t) =
     ) t.testsuites
   in
   Junit_xml.to_xml testsuites
+
+let to_file (t:t) filename =
+  let xml_report = to_xml t in
+  let oc = open_out filename in
+  let fmt = Format.formatter_of_out_channel oc in
+  Format.fprintf fmt "@[%a@]@." (Tyxml.Xml.pp ()) xml_report;
+  close_out oc;
+  ()
