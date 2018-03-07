@@ -1,5 +1,7 @@
 module A = Alcotest
 
+type exit = unit -> unit
+
 let push l v = l := v :: !l
 
 let wrap_test handle_result (name, s, test) =
@@ -39,7 +41,7 @@ let wrap_test handle_result (name, s, test) =
 let run ?argv name tl =
   A.run ~and_exit:false ?argv name tl
 
-let run_and_report ?package ?timestamp ?argv name tests =
+let run_and_report ?(and_exit=true) ?package ?timestamp ?argv name tests =
   let testcases = ref [] in
   let testsuite = Junit.Testsuite.make ?package ?timestamp ~name () in
   let tests =
@@ -47,8 +49,11 @@ let run_and_report ?package ?timestamp ?argv name tests =
       (title, List.map (wrap_test (push testcases)) test_set)
     ) tests
   in
-  let () =
-    try run ?argv name tests
-    with A.Test_error -> ()
+  let exit =
+    try
+      run ?argv name tests;
+      fun () -> if and_exit then exit 0 else ()
+    with A.Test_error ->
+    fun () -> if and_exit then exit 1 else raise A.Test_error
   in
-  Junit.Testsuite.add_testcases !testcases testsuite
+  Junit.Testsuite.add_testcases !testcases testsuite, exit

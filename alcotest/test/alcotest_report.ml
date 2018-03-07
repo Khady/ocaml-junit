@@ -25,23 +25,33 @@ let test_set = [
   A.test_case "Test with wrong result" `Quick wrong_result;
 ]
 
+let success_test_set = [
+  A.test_case "Capitalize" `Quick capit;
+  A.test_case "Add entries" `Slow plus;
+]
+
 let timestamp =
   match Ptime.of_date_time ((2013, 5, 24), ((10, 23, 58), 0)) with
   | Some t -> t
   | None -> assert false
 
 let alcotest () =
-  let package = "junit" in
-  let testsuite1 = JA.run_and_report ~package ~timestamp "My first test" [
+  let package = "junit_alcotest" in
+  let (testsuite1, _) = JA.run_and_report ~package ~timestamp "My first test" [
     "Basic tests", test_set;
   ]
   in
-  let testsuite2 = JA.run_and_report ~package ~timestamp "My second test" [
+  let (testsuite2, _) = JA.run_and_report ~package ~timestamp "My second test" [
     "Basic tests", test_set;
   ]
   in
-  let report = Junit.make [testsuite1; testsuite2] in
+  let (testsuite3, exit) = JA.run_and_report ~and_exit:false ~package ~timestamp "Success test suite" [
+    "Good tests", success_test_set;
+  ]
+  in
+  let report = Junit.make [testsuite1; testsuite2; testsuite3] in
   let xml_report = Junit.to_xml report in
-  Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report
+  Format.printf "%a\n" (Tyxml.Xml.pp ()) xml_report;
+  exit ()
 
 let () = alcotest ()

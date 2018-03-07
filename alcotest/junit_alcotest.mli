@@ -23,16 +23,33 @@ val run: ?argv:string array -> string -> unit Alcotest.test list -> unit
     Low level function. It is easier to use {!run_and_report}.
 *)
 
+type exit = unit -> unit
+(** [exit ()] exists with appropriate code if {!run_and_report}'s
+    [and_exit] was [true] or raise {!Alcotest.Test_error} in case of
+    error.
+*)
+
 val run_and_report:
+  ?and_exit:bool ->
   ?package:string ->
   ?timestamp:Ptime.t ->
   ?argv:string array ->
   string ->
   (string * unit Alcotest.test_case list) list ->
-  Junit.Testsuite.t
+  (Junit.Testsuite.t * exit)
 (** [run name tests] is a wrapper around {!run} and {!wrap_test}. It
     runs the tests and creates a Junit testsuite from the results.
 
-    [?argv] is forwarded to {!run}.
-    [?package] and [?timestamp] and forwarded to {!Junit.Testsuite.make}.
+    As {!Alcotest.run} is always called with [and_exit = false] to be
+    able to produce a report, the behavior is emulated by the returned
+    {!exit} function.
+
+    The optional argument [and_exit] controls what happens when the
+    {!exit} function is called. By default, [and_exit] is set, which
+    makes the function exit with [0] if everything is fine or [1] if
+    there is an issue. If [and_exit] is [false], then the function
+    raises [Test_error] on error.
+
+    [?argv] is forwarded to {!run}. [?package] and [?timestamp] are
+    forwarded to {!Junit.Testsuite.make}.
 *)
