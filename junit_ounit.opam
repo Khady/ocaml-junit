@@ -5,7 +5,7 @@ homepage: "https://github.com/Khady/ocaml-junit"
 bug-reports: "https://github.com/Khady/ocaml-junit/issues"
 license: "LGPLv3+ with OCaml linking exception"
 dev-repo: "https://github.com/Khady/ocaml-junit.git"
-doc: "https://khady.github.io/ocaml-junit/junit/"
+doc: "https://khady.github.io/ocaml-junit/"
 tags: ["junit" "jenkins" "ounit"]
 depends: [
   "ocamlfind" {build}

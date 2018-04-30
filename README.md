@@ -16,7 +16,7 @@ opam pin add junit_alcotest https://github.com/Khady/ocaml-junit.git
 
 ## Documentation
 
-Available [here](https://khady.github.io/ocaml-junit/junit/)
+Available [here](https://khady.github.io/ocaml-junit/)
 
 ## References:
 
