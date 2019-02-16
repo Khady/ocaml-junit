@@ -19,6 +19,5 @@ build: [
   ["dune" "build" "-p" name "-j" jobs] {with-doc}
 ]
 name: "junit_ounit"
-version: "dev"
 synopsis: "JUnit XML reports generation for OUnit tests"
 description: "JUnit XML reports generation for OUnit tests"

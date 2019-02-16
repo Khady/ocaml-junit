@@ -1,4 +1,4 @@
-## UNRELEASED
+## 2.0.1 (2019-02-16)
 
 - remove pkg
 - migrate to opam 2
