@@ -2,22 +2,35 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ocaml/opam:ubuntu-17.04_ocaml-4.02.3
+      - image: ocaml/opam2:debian-stable
         environment:
           TERM: xterm
     steps:
       - checkout
       - run:
-          name: build
+          name: Install system deps
           command: |
-            opam pin add -y junit .
-            opam pin add -y junit_ounit .
-            opam pin add -y junit_alcotest .
+            sudo apt install m4 -y -qq
+      - restore_cache:
+          key: cache-{{ checksum "junit.opam" }}-{{ checksum "junit_alcotest.opam" }}-{{ checksum "junit_ounit.opam" }}
       - run:
-          name: test
+          name: Update opam package list
+          command: opam update
+      - run:
+          name: 'Install deps'
+          command: opam install . --deps-only
+      - save_cache:
+          key: cache-{{ checksum "junit.opam" }}-{{ checksum "junit_alcotest.opam" }}-{{ checksum "junit_ounit.opam" }}
+          paths:
+            - ~/.opam
+      - run:
+          name: Build
+          command: opam pin add -y .
+      - run:
+          name: Test
           command: eval `opam config env` && make test
       - run:
-          name: collect xml reports
+          name: Collect xml reports
           command: |
             mkdir -p ~/reports
             cp _build/default/junit/test/simple.xml ~/reports
