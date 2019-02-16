@@ -1,14 +1,14 @@
 build:
-	jbuilder build --dev
+	dune build
 
 doc:
-	jbuilder build @doc
+	dune build @doc
 
 test:
-	jbuilder runtest --dev
+	dune runtest
 
 clean:
-	jbuilder clean
+	dune clean
 
 REPO=../opam-repository
 PACKAGES=$(REPO)/packages

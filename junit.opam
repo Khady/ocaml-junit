@@ -8,15 +8,15 @@ dev-repo: "https://github.com/Khady/ocaml-junit.git"
 doc: "https://khady.github.io/ocaml-junit/"
 tags: ["junit" "jenkins"]
 depends: [
-  "jbuilder" {build & >= "1.0+beta10"}
+  "dune" {build & >= "1.0"}
   "ptime"
   "tyxml" {>= "4.0.0"}
   "odoc" {doc & >= "1.1.1"}
 ]
 available: [ocaml-version >= "4.02.3"]
 build: [
-  ["jbuilder" "subst"] {pinned}
-  ["jbuilder" "build" "-p" name "-j" jobs]
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
 ]
-build-test: [["jbuilder" "runtest" "-p" name "-j" jobs]]
-build-doc: [["jbuilder" "build" "@doc" "-p" name "-j" jobs]]
+build-test: [["dune" "runtest" "-p" name "-j" jobs]]
+build-doc: [["dune" "build" "-p" name "-j" jobs]]

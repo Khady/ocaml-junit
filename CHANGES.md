@@ -1,3 +1,7 @@
+## UNRELEASED
+
+- migrate to dune
+
 ## 2.0 (2017-04-30)
 
 - add alcotest and ounit support

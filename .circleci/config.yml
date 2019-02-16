@@ -10,7 +10,6 @@ jobs:
       - run:
           name: build
           command: |
-            opam pin add -y jbuilder https://github.com/ocaml/dune.git#1.0+beta18
             opam pin add -y junit .
             opam pin add -y junit_ounit .
             opam pin add -y junit_alcotest .
