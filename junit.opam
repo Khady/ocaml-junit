@@ -22,3 +22,4 @@ build: [
 name: "junit"
 version: "dev"
 synopsis: "JUnit XML reports generation library"
+description: "JUnit XML reports generation library"

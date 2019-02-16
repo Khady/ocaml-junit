@@ -21,3 +21,4 @@ build: [
 name: "junit_alcotest"
 version: "dev"
 synopsis: "JUnit XML reports generation for alcotest tests"
+description: "JUnit XML reports generation for alcotest tests"
