@@ -10,14 +10,14 @@ let wrap_test handle_result (name, s, test) =
       test ();
       Junit.Testcase.pass
         ~name
-        ~classname:""
+        ~classname:name
         ~time:0.
       |> handle_result
     with
     | Failure exn_msg as exn ->
       Junit.Testcase.failure
         ~name
-        ~classname:""
+        ~classname:name
         ~time:0.
         ~typ:"not expected result"
         ~message:"test failed"
@@ -28,7 +28,7 @@ let wrap_test handle_result (name, s, test) =
       let exn_msg = Printexc.to_string exn in
       Junit.Testcase.error
         ~name
-        ~classname:""
+        ~classname:name
         ~time:0.
         ~typ:"exception raised"
         ~message:"test crashed"
