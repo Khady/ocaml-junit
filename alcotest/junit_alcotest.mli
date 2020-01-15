@@ -5,6 +5,7 @@
 *)
 
 val wrap_test :
+  ?path:string ->
   (Junit.Testcase.t -> unit) ->
   unit Alcotest.test_case ->
   unit Alcotest.test_case
@@ -13,6 +14,11 @@ val wrap_test :
 
     Can be used with {!run} to create customized Junit testsuites if
     the output of {!run_and_report} is not as expected.
+
+    @param path if specified is prepended to the test case name to form
+    a dot-separated path that will populate the 'classname' field of the
+    XML test case. Jenkins uses dots to detect and display tests as a
+    hierarchy.
 *)
 
 val run: ?argv:string array -> string -> unit Alcotest.test list -> unit

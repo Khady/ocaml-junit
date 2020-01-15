@@ -4,20 +4,25 @@ type exit = unit -> unit
 
 let push l v = l := v :: !l
 
-let wrap_test handle_result (name, s, test) =
+let wrap_test ?path handle_result (name, s, test) =
+  let classname =
+    match path with
+    | None -> name
+    | Some path -> Printf.sprintf "%s.%s" path name
+  in
   let test () =
     try
       test ();
       Junit.Testcase.pass
         ~name
-        ~classname:name
+        ~classname
         ~time:0.
       |> handle_result
     with
     | Failure exn_msg as exn ->
       Junit.Testcase.failure
         ~name
-        ~classname:name
+        ~classname
         ~time:0.
         ~typ:"not expected result"
         ~message:"test failed"
@@ -28,7 +33,7 @@ let wrap_test handle_result (name, s, test) =
       let exn_msg = Printexc.to_string exn in
       Junit.Testcase.error
         ~name
-        ~classname:name
+        ~classname
         ~time:0.
         ~typ:"exception raised"
         ~message:"test crashed"
@@ -46,7 +51,8 @@ let run_and_report ?(and_exit=true) ?package ?timestamp ?argv name tests =
   let testsuite = Junit.Testsuite.make ?package ?timestamp ~name () in
   let tests =
     List.map (fun (title, test_set) ->
-      (title, List.map (wrap_test (push testcases)) test_set)
+      let path = Printf.sprintf "%s.%s" name title in
+      (title, List.map (wrap_test ~path (push testcases)) test_set)
     ) tests
   in
   let exit =
