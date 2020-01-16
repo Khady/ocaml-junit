@@ -4,11 +4,16 @@ type exit = unit -> unit
 
 let push l v = l := v :: !l
 
-let wrap_test ?path handle_result (name, s, test) =
+let wrap_test ?classname handle_result (name, s, test) =
   let classname =
-    match path with
-    | None -> name
-    | Some path -> Printf.sprintf "%s.%s" path name
+    (* The 'classname' attribute may not be empty, and should contain a period
+       for best rendering in Jenkins by junit-plugin.
+       For example, classname="foo.bar.baz" is rendered as a package "foo.bar"
+       containing a class "baz" containing one or more test cases with their
+       own name. *)
+    match classname with
+    | None | Some "" -> name
+    | Some path -> path
   in
   let test () =
     try
@@ -51,8 +56,8 @@ let run_and_report ?(and_exit=true) ?package ?timestamp ?argv name tests =
   let testsuite = Junit.Testsuite.make ?package ?timestamp ~name () in
   let tests =
     List.map (fun (title, test_set) ->
-      let path = Printf.sprintf "%s.%s" name title in
-      (title, List.map (wrap_test ~path (push testcases)) test_set)
+      let classname = Printf.sprintf "%s.%s" name title in
+      (title, List.map (wrap_test ~classname (push testcases)) test_set)
     ) tests
   in
   let exit =
