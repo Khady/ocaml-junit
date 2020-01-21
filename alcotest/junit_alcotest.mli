@@ -5,6 +5,7 @@
 *)
 
 val wrap_test :
+  ?classname:string ->
   (Junit.Testcase.t -> unit) ->
   unit Alcotest.test_case ->
   unit Alcotest.test_case
@@ -13,6 +14,12 @@ val wrap_test :
 
     Can be used with {!run} to create customized Junit testsuites if
     the output of {!run_and_report} is not as expected.
+
+    @param classname will populate the 'classname' attribute
+    for the test case. For best hierarchic rendering in Jenkins, it
+    should contain a period. For example, "foo.bar.baz" will be rendered
+    a package "foo.bar" that contains a class "baz", which contains the
+    current test case and others. Defaults to the name of the test case.
 *)
 
 val run: ?argv:string array -> string -> unit Alcotest.test list -> unit
