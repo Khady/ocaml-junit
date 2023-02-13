@@ -10,7 +10,7 @@ tags: ["junit" "jenkins" "ounit"]
 depends: [
   "dune" {>= "1.0"}
   "odoc" {with-doc & >= "1.1.1"}
-  "ounit"
+  "ounit2"
   "junit"
 ]
 build: [
