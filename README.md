@@ -9,9 +9,7 @@ It comes with two packages for support of OUnit and Alcotest.
 ## Installation
 
 ```
-opam pin add junit https://github.com/Khady/ocaml-junit.git
-opam pin add junit_ounit https://github.com/Khady/ocaml-junit.git
-opam pin add junit_alcotest https://github.com/Khady/ocaml-junit.git
+opam install junit junit_ounit junit_alcotest
 ```
 
 ## Documentation
