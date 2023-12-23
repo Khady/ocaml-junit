@@ -10,4 +10,7 @@ test:
 clean:
 	dune clean
 
-.PHONY: examples doc test build
+fmt:
+	dune build @fmt --auto-promote
+
+.PHONY: examples doc test build fmt

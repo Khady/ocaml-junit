@@ -3,5 +3,4 @@
  (public_name junit_alcotest)
  (wrapped false)
  (synopsis "JUnit XML reports generation for alcotest tests")
- (libraries junit alcotest)
- (flags :standard -safe-string -short-paths))
+ (libraries junit alcotest))
