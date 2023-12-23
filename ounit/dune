@@ -3,5 +3,4 @@
  (public_name junit_ounit)
  (wrapped false)
  (synopsis "JUnit XML reports generation for OUnit tests")
- (libraries junit ounit2)
- (flags :standard -safe-string -short-paths))
+ (libraries junit ounit2))
