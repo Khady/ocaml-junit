@@ -10,7 +10,7 @@ let capit () =
   A.(check char) "Check A" 'A' (To_test.capit 'a')
 
 let plus () =
-  A.(check int)"Sum equals to 7" 7 (To_test.plus [1;1;2;3])
+  A.(check int) "Sum equals to 7" 7 (To_test.plus [1;1;2;3])
 
 let wrong_result () =
   A.(check string) "string_of_int equals to '7'" "7" (string_of_int 8)
@@ -30,6 +30,11 @@ let success_test_set = [
   A.test_case "Add entries" `Slow plus;
 ]
 
+let skipped_test_set = [
+  A.test_case "Skipped quick" `Quick (fun () -> A.skip ());
+  A.test_case "Skipped slow" `Slow (fun () -> A.skip ());
+]
+
 let timestamp =
   match Ptime.of_date_time ((2013, 5, 24), ((10, 23, 58), 0)) with
   | Some t -> t
@@ -37,6 +42,10 @@ let timestamp =
 
 let alcotest path =
   let package = "junit_alcotest" in
+  let (testsuite0, _) = JA.run_and_report ~package ~timestamp "Skip test suite" [
+    "Skipped tests", skipped_test_set;
+  ]
+  in
   let (testsuite1, _) = JA.run_and_report ~package ~timestamp "My first test" [
     "Basic tests", test_set;
   ]
@@ -49,7 +58,7 @@ let alcotest path =
     "Good tests", success_test_set;
   ]
   in
-  let report = Junit.make [testsuite1; testsuite2; testsuite3] in
+  let report = Junit.make [testsuite0; testsuite1; testsuite2; testsuite3] in
   begin match path with
     | None ->
       let xml_report = Junit.to_xml report in
