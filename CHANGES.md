@@ -1,3 +1,9 @@
+## 2.1.0 (2024-12-22)
+
+- add skipped attribute to testsuite (#10)
+- fix skipped support for alcotest (#10)
+- depend on ounit2
+
 ## 2.0.1 (2019-02-16)
 
 - remove pkg
