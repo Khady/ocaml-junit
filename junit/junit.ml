@@ -88,6 +88,7 @@ module Testsuite = struct
       tests: int;
       failures: int;
       errors: int;
+      skipped: int;
       time: float;
       system_out: string option;
       system_err: string option;
@@ -123,6 +124,7 @@ module Testsuite = struct
       tests = 0;
       failures = 0;
       errors = 0;
+      skipped = 0;
       time = 0.;
       system_out;
       system_err;
@@ -140,8 +142,9 @@ module Testsuite = struct
       }
     in
     match testcase.Testcase.result with
-    | Testcase.Pass
-    | Testcase.Skipped -> t
+    | Testcase.Pass -> t
+    | Testcase.Skipped ->
+      { t with skipped = t.skipped + 1; }
     | Testcase.Error _ ->
       { t with errors = t.errors + 1; }
     | Testcase.Failure _ ->
@@ -211,6 +214,7 @@ let to_xml (t:t) =
         ~tests:t.tests
         ~failures:t.failures
         ~errors:t.errors
+        ~skipped:t.skipped
         ~time:t.time
         properties
         testcases
