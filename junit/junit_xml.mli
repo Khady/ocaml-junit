@@ -168,6 +168,7 @@ val testsuite :
   tests:int ->
   failures:int ->
   errors:int ->
+  skipped:int ->
   time:float ->
   properties ->
   testcases ->
@@ -204,6 +205,10 @@ val testsuite :
     errored. An errored test is one that had an unanticipated
     problem. e.g., an unchecked throwable; or a problem with the
     implementation of the test.
+
+    @param skipped The total number of tests in the suite that
+    were skipped. A skipped test is one that was not run because
+    the conditions for running it were not met.
 
     @param time Time taken (in seconds) to execute the tests in the
     suite.

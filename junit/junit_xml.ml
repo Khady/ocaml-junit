@@ -131,6 +131,7 @@ type testsuite =
     tests : int;
     failures : int;
     errors : int;
+    skipped : int;
     time : float;
     properties : properties;
     testcases : testcases;
@@ -151,6 +152,7 @@ let testsuite
     ~tests
     ~failures
     ~errors
+    ~skipped
     ~time
     properties
     testcases
@@ -164,6 +166,7 @@ let testsuite
     tests;
     failures;
     errors;
+    skipped;
     time;
     properties;
     testcases;
@@ -180,6 +183,7 @@ let testsuite_to_xml testsuite =
   let tests = int_attrib "tests" testsuite.tests in
   let failures = int_attrib "failures" testsuite.failures in
   let errors = int_attrib "errors" testsuite.errors in
+  let skipped = int_attrib "skipped" testsuite.skipped in
   let time = float_attrib "time" testsuite.time in
   let attributes =
     [
@@ -191,6 +195,7 @@ let testsuite_to_xml testsuite =
       tests;
       failures;
       errors;
+      skipped;
       time;
     ]
   in
