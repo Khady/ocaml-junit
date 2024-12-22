@@ -11,10 +11,10 @@ depends: [
   "dune" {>= "1.0"}
   "odoc" {with-doc & >= "1.1.1"}
   "ounit2"
-  "junit"
+  "junit" {= version}
 ]
 build: [
-  ["dune" "subst"] {pinned}
+  ["dune" "subst"] {dev}
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "build" "-p" name "-j" jobs] {with-doc}
 ]
