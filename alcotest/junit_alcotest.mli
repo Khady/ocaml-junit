@@ -28,12 +28,12 @@ val wrap_test
     Low level function. It is easier to use {!run_and_report}. *)
 val run : ?argv:string array -> string -> unit Alcotest.test list -> unit
 
-(** [exit ()] exists with appropriate code if {!run_and_report}'s
+(** [exit ()] exits with appropriate code if {!run_and_report}'s
     [and_exit] was [true] or raise {!Alcotest.Test_error} in case of
     error. *)
 type exit = unit -> unit
 
-(** [run name tests] is a wrapper around {!run} and {!wrap_test}. It
+(** [run_and_report name tests] is a wrapper around {!run} and {!wrap_test}. It
     runs the tests and creates a Junit testsuite from the results.
 
     As {!Alcotest.run} is always called with [and_exit = false] to be
