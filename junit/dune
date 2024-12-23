@@ -3,5 +3,4 @@
  (public_name junit)
  (wrapped false)
  (synopsis "JUnit XML reports generation library")
- (libraries tyxml ptime ptime.clock.os)
- (flags :standard -safe-string -short-paths))
+ (libraries tyxml ptime ptime.clock.os))

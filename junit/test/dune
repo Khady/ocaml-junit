@@ -1,15 +1,15 @@
 (executable
  (name simple)
  (modules simple)
- (libraries junit)
- (flags :standard -safe-string -short-paths))
+ (libraries junit))
 
 (rule
  (targets simple.xml)
- (action (run %{dep:simple.exe} %{targets})))
+ (action
+  (run %{dep:simple.exe} %{targets})))
 
-(alias
- (name runtest)
+(rule
+ (alias runtest)
  (deps simple.exe)
  (package junit)
  (action
