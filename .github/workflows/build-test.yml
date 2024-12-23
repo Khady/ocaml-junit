@@ -47,3 +47,11 @@ jobs:
           reporter: java-junit
           fail-on-error: false # Report results but don't fail the build
           fail-on-empty: true # Use an empty test report to detect when something failed with the test runner
+
+      - run: opam install . --deps-only --with-test --criteria='+removed,+count[version-lag,solution]' --solver=builtin-0install
+
+      - name: build project
+        run: opam exec -- dune build
+
+      - name: run test
+        run: opam exec -- dune runtest
