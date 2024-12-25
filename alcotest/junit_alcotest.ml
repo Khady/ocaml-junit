@@ -30,8 +30,9 @@ let wrap_test ?classname handle_result (name, s, test) =
         exn_msg
       |> handle_result;
       raise exn
-    | Alcotest_engine__Core.Skip ->
-      Junit.Testcase.skipped ~name ~classname ~time:0. |> handle_result
+    | Alcotest_engine__Core.Skip as exn ->
+      Junit.Testcase.skipped ~name ~classname ~time:0. |> handle_result;
+      raise exn
     | exn ->
       let exn_msg = Printexc.to_string exn in
       Junit.Testcase.error
