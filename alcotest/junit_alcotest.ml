@@ -1,5 +1,7 @@
 module A = Alcotest
 
+external reraise : exn -> 'a = "%reraise"
+
 type exit = unit -> unit
 
 let push l v = l := v :: !l
@@ -29,10 +31,10 @@ let wrap_test ?classname handle_result (name, s, test) =
         ~message:"test failed"
         exn_msg
       |> handle_result;
-      raise exn
+      reraise exn
     | Alcotest_engine__Core.Skip as exn ->
       Junit.Testcase.skipped ~name ~classname ~time:0. |> handle_result;
-      raise exn
+      reraise exn
     | exn ->
       let exn_msg = Printexc.to_string exn in
       Junit.Testcase.error
@@ -43,7 +45,7 @@ let wrap_test ?classname handle_result (name, s, test) =
         ~message:"test crashed"
         exn_msg
       |> handle_result;
-      raise exn
+      reraise exn
   in
   name, s, test
 ;;
@@ -65,7 +67,7 @@ let run_and_report ?(and_exit = true) ?package ?timestamp ?argv name tests =
       run ?argv name tests;
       fun () -> if and_exit then exit 0 else ()
     with
-    | A.Test_error -> fun () -> if and_exit then exit 1 else raise A.Test_error
+    | A.Test_error as exn -> fun () -> if and_exit then exit 1 else reraise exn
   in
   Junit.Testsuite.add_testcases !testcases testsuite, exit
 ;;
