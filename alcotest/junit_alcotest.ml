@@ -50,9 +50,27 @@ let wrap_test ?classname handle_result (name, s, test) =
   name, s, test
 ;;
 
-let run ?argv name tl = A.run ~and_exit:false ?argv name tl
-
-let run_and_report ?(and_exit = true) ?package ?timestamp ?argv name tests =
+let run_and_report
+      ?stdout
+      ?stderr
+      ?(and_exit = true)
+      ?verbose
+      ?compact
+      ?tail_errors
+      ?quick_only
+      ?show_errors
+      ?json
+      ?filter
+      ?log_dir
+      ?bail
+      ?record_backtrace
+      ?ci
+      ?package
+      ?timestamp
+      ?argv
+      name
+      tests
+  =
   let testcases = ref [] in
   let testsuite = Junit.Testsuite.make ?package ?timestamp ~name () in
   let tests =
@@ -64,7 +82,24 @@ let run_and_report ?(and_exit = true) ?package ?timestamp ?argv name tests =
   in
   let exit =
     try
-      run ?argv name tests;
+      A.run
+        ?stdout
+        ?stderr
+        ?verbose
+        ?compact
+        ?tail_errors
+        ?quick_only
+        ?show_errors
+        ?json
+        ?filter
+        ?log_dir
+        ?bail
+        ?record_backtrace
+        ?ci
+        ?argv
+        ~and_exit:false
+        name
+        tests;
       fun () -> if and_exit then exit 0 else ()
     with
     | A.Test_error as exn -> fun () -> if and_exit then exit 1 else reraise exn
