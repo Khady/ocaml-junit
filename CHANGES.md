@@ -1,3 +1,10 @@
+## 2.2.0 (2024-12-25)
+
+- fix bug marking alcotest skipped tests as passed
+- reraise exceptions to clean backtraces
+- expose arguments of `Alcotest.run`
+- increase dependency on alcotest to 1.8.0
+
 ## 2.1.0 (2024-12-22)
 
 - add skipped attribute to testsuite (#10)
