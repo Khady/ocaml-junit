@@ -19,6 +19,7 @@ let test_set =
   ; A.test_case "Capitalize" `Quick capit
   ; A.test_case "Add entries" `Slow plus
   ; A.test_case "Test with wrong result" `Quick wrong_result
+  ; A.test_case "Test skipped" `Quick (fun () -> A.skip ())
   ]
 ;;
 

@@ -6,7 +6,7 @@
 (** [wrap_test handle_result test_cases] wraps test cases to create
     Junit testcases and pass them to [handle_result].
 
-    Can be used with {!run} to create customized Junit testsuites if
+    Can be used with {!Alcotest.run} to create customized Junit testsuites if
     the output of {!run_and_report} is not as expected.
 
     @param classname
@@ -21,20 +21,13 @@ val wrap_test
   -> unit Alcotest.test_case
   -> unit Alcotest.test_case
 
-(** [run ?argv n t] is a wrapper around {!Alcotest.run}, only setting
-    [and_exit] to false. It is mandatory to be able to process results
-    after the end of the run.
-
-    Low level function. It is easier to use {!run_and_report}. *)
-val run : ?argv:string array -> string -> unit Alcotest.test list -> unit
-
 (** [exit ()] exits with appropriate code if {!run_and_report}'s
     [and_exit] was [true] or raise {!Alcotest.Test_error} in case of
     error. *)
 type exit = unit -> unit
 
-(** [run_and_report name tests] is a wrapper around {!run} and {!wrap_test}. It
-    runs the tests and creates a Junit testsuite from the results.
+(** [run_and_report name tests] is a wrapper around {!Alcotest.run} and {!wrap_test}.
+    It runs the tests and creates a Junit testsuite from the results.
 
     As {!Alcotest.run} is always called with [and_exit = false] to be
     able to produce a report, the behavior is emulated by the returned
@@ -49,10 +42,10 @@ type exit = unit -> unit
     [?argv] is forwarded to {!run}. [?package] and [?timestamp] are
     forwarded to {!Junit.Testsuite.make}. *)
 val run_and_report
-  :  ?and_exit:bool
-  -> ?package:string
-  -> ?timestamp:Ptime.t
-  -> ?argv:string array
-  -> string
-  -> (string * unit Alcotest.test_case list) list
-  -> Junit.Testsuite.t * exit
+  : (?package:string
+     -> ?timestamp:Ptime.t
+     -> ?argv:string array
+     -> string
+     -> (string * unit Alcotest.test_case list) list
+     -> Junit.Testsuite.t * exit)
+      Alcotest.with_options
