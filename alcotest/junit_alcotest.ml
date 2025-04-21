@@ -32,7 +32,7 @@ let wrap_test ?classname handle_result (name, s, test) =
         exn_msg
       |> handle_result;
       reraise exn
-    | Alcotest_engine__Core.Skip as exn ->
+    | Alcotest_engine.V1.Core.Skip as exn ->
       Junit.Testcase.skipped ~name ~classname ~time:0. |> handle_result;
       reraise exn
     | exn ->
