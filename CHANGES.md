@@ -1,3 +1,7 @@
+## 2.3.0 (2025-04-21)
+
+- upgrade minimal alcotest to 1.9.0
+
 ## 2.2.0 (2024-12-25)
 
 - fix bug marking alcotest skipped tests as passed
