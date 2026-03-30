@@ -12,8 +12,15 @@
    (run %{dep:alcotest_report.exe}))))
 
 (rule
+ (targets alcotest_report_normalized.xml)
+ (action
+  (with-stdout-to
+   %{targets}
+   (bash "sed 's/time=\"[^\"]*\"/time=\"0\"/g' %{dep:alcotest_report.xml}"))))
+
+(rule
  (alias runtest)
  (package junit_alcotest)
  (action
-  (diff %{dep:alcotest_report.expected} %{dep:alcotest_report.xml}))
+  (diff %{dep:alcotest_report.expected} %{dep:alcotest_report_normalized.xml}))
  (deps alcotest_report.exe))
