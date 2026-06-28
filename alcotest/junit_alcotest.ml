@@ -18,29 +18,31 @@ let wrap_test ?classname handle_result (name, s, test) =
     | Some path -> path
   in
   let test () =
+    let start = Unix.gettimeofday () in
+    let elapsed () = Unix.gettimeofday () -. start in
     try
       test ();
-      Junit.Testcase.pass ~name ~classname ~time:0. |> handle_result
+      Junit.Testcase.pass ~name ~classname ~time:(elapsed ()) |> handle_result
     with
     | Failure exn_msg as exn ->
       Junit.Testcase.failure
         ~name
         ~classname
-        ~time:0.
+        ~time:(elapsed ())
         ~typ:"not expected result"
         ~message:"test failed"
         exn_msg
       |> handle_result;
       reraise exn
     | Alcotest_engine.V1.Core.Skip as exn ->
-      Junit.Testcase.skipped ~name ~classname ~time:0. |> handle_result;
+      Junit.Testcase.skipped ~name ~classname ~time:(elapsed ()) |> handle_result;
       reraise exn
     | exn ->
       let exn_msg = Printexc.to_string exn in
       Junit.Testcase.error
         ~name
         ~classname
-        ~time:0.
+        ~time:(elapsed ())
         ~typ:"exception raised"
         ~message:"test crashed"
         exn_msg
